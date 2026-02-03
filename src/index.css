@@ -1,0 +1,16 @@
+/* src/index.css */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    /* 🔴 REMOVED: height: auto !important */
+    /* 🔴 REMOVED: min-height: 100% */
+    /* 🔴 REMOVED: overflow-y: auto !important (THIS WAS THE KILLER) */
+    width: 100%;
+}
+
+#root {
+    width: 100%;
+    /* Let the content decide the height */
+    position: relative;
+}
