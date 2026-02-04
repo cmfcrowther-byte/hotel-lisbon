@@ -14,3 +14,52 @@ body {
     /* Let the content decide the height */
     position: relative;
 }
+
+/* --- MOBILE FIXES --- */
+@media (max-width: 768px) {
+
+    /* 1. Force the container to take the full height of the phone */
+    #hotel-lisbon-hero-mount {
+        height: 100vh !important;
+        min-height: 100vh;
+        overflow: hidden;
+        /* This chops off the left/right wings of the hotel */
+        position: relative;
+    }
+
+    /* 2. The Hotel Image: Zoom in to fill the height */
+    .hotel-background {
+        height: 100% !important;
+        /* Fill the vertical space */
+        width: auto !important;
+        /* Let the width overflow off-screen */
+        min-width: 100%;
+        /* Ensure no white space on sides */
+
+        /* The Magic Command: Zooms in and crops sides */
+        object-fit: cover;
+        object-position: center bottom;
+        /* Focus on the middle-bottom (street level) */
+    }
+
+    /* 3. The Car: Resize and center it */
+    .hotel-car {
+        width: 260px !important;
+        /* Make it big enough to see */
+        bottom: 15% !important;
+        /* Lift it up to sit on the "zoomed" road */
+        left: 50% !important;
+        /* Move to middle */
+        transform: translateX(-50%);
+        /* Perfect centering */
+    }
+
+    /* 4. The Man/Doorman: Make sure they are visible */
+    .hotel-man,
+    .hotel-door {
+        width: 100px !important;
+        /* Adjust size for mobile */
+        bottom: 15% !important;
+        /* Match the road level */
+    }
+}
