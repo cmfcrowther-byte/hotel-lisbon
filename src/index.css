@@ -42,27 +42,24 @@ body {
     }
 
     .hotel-vector {
-        /* 🔴 1. DYNAMIC HEIGHT */
-        /* The image will grow/shrink live to match the screen exactly */
-        height: 100dvh !important;
+        /* 🔴 1. LOCK HEIGHT */
+        height: 100svh !important;
 
-        /* 2. POSITION */
+        /* 2. PIN TO BOTTOM */
         position: fixed !important;
         bottom: 0 !important;
         top: auto !important;
 
-        /* 3. WIDTH & CENTERING */
+        /* 3. CENTER */
         left: 50% !important;
         transform: translateX(-50%) !important;
-
-        /* Ensure it's wide enough to handle the zoom */
         width: auto !important;
         min-width: 180vh;
 
-        /* 4. PERFORMANCE */
+        /* 4. SOLIDITY (No animations) */
         z-index: 0;
         backface-visibility: hidden;
-        /* We allow the browser to handle the resize naturally, so no transition */
         transition: none !important;
+        /* <--- No more smooth zoom. Rock solid. */
     }
 }
