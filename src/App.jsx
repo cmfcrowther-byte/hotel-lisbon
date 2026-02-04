@@ -138,19 +138,17 @@ const HotelLayer = () => {
         <div ref={containerRef} style={{
             position: 'fixed',
 
-            /* 🔴 1. UNPIN FROM BOTTOM */
-            bottom: 'auto',
-            top: '50%', /* Move to vertical middle */
+            /* 🔴 1. ANCHOR TO BOTTOM */
+            bottom: 0,
             left: 0,
             width: '100%',
 
-            /* 🔴 2. KEEP FIXED HEIGHT */
+            /* 🔴 2. LOCK TO SMALL HEIGHT (No growing, no shrinking) */
             height: '100svh',
 
-            /* 🔴 3. ALIGN TO CENTER */
-            transform: 'translateY(-50%)', /* Perfect centering */
+            /* 🔴 3. ALIGN TO BOTTOM */
             display: 'flex',
-            alignItems: 'flex-end', /* Keep content at bottom of container */
+            alignItems: 'flex-end',
             justifyContent: 'center',
 
             zIndex: 1,
