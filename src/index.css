@@ -22,33 +22,38 @@ body {
     margin: 0 auto;
 }
 
-/* --- 2. MOBILE FIXES (The "Zoom") --- */
+/* --- MOBILE FIXES (The "Sky Buffer" Solution) --- */
 @media (max-width: 768px) {
 
-    /* 🟢 PASTE THIS NEW BLOCK */
     #main-container {
+        /* Set a fallback background color just in case */
+        background-color: #e4dcd1;
+
         height: auto !important;
-        /* Allow the page to be long (8000px) so we can scroll */
         min-height: 100vh;
         overflow-x: hidden;
-        /* Only hide the SIDES (horizontal), allow Vertical scroll */
         overflow-y: visible;
-        /* Explicitly allow scrolling down */
         position: relative;
     }
 
     .hotel-vector {
-        height: 100vh !important;
-        /* Zoomed In */
+        /* 1. HEIGHT: Fit exactly into the "Small" viewport (with address bar) */
+        height: 100svh !important;
+
+        /* 2. WIDTH: Ensure it zooms/crops the sides to fill space */
         width: auto !important;
         min-width: 180vh;
-        /* Ensure it's wide enough */
+        /* Adjust this if you want it wider/narrower */
 
+        /* 3. POSITION: Anchor to the BOTTOM */
+        /* If the screen gets taller, the empty space appears at the TOP (Sky) */
         position: fixed !important;
-        /* Stays stuck to the screen while you scroll */
-        top: 0 !important;
+        bottom: 0 !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
         z-index: 0;
+
+        /* 4. STABILITY: No resizing animations */
+        transition: none !important;
     }
 }
