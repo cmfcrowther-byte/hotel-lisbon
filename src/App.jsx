@@ -136,9 +136,24 @@ const HotelLayer = () => {
 
     return (
         <div ref={containerRef} style={{
-            position: 'fixed', bottom: 0, left: 0, width: '100%', height: '100vh',
-            display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
-            zIndex: 1, pointerEvents: 'none'
+            position: 'fixed',
+
+            /* 🔴 1. ANCHOR TO BOTTOM */
+            bottom: 0,
+            left: 0,
+            width: '100%',
+
+            /* 🔴 2. USE SVH (Small Viewport Height) */
+            /* This fits the hotel perfectly between the address bar and the bottom */
+            height: '100svh',
+
+            /* 🔴 3. ALIGN TO BOTTOM */
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'center',
+
+            zIndex: 1,
+            pointerEvents: 'none'
         }}>
             {/* HOTEL ILLUSTRATION */}
             <HotelVector

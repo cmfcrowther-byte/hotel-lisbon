@@ -42,23 +42,25 @@ body {
     }
 
     .hotel-vector {
-        /* 1. HEIGHT: Lock to the "Smallest" view (Address bar visible) */
+        /* 1. HEIGHT: Fit perfectly on load */
         height: 100svh !important;
 
-        /* 2. POSITION: Pin to TOP */
+        /* 2. POSITION: Pin to the FLOOR */
         position: fixed !important;
-        top: 0 !important;
+        bottom: 0 !important;
+        /* <--- CHANGED FROM TOP TO BOTTOM */
+        top: auto !important;
+        /* <--- RELEASE THE TOP */
+
+        /* 3. CENTER & WIDTH */
         left: 50% !important;
         transform: translateX(-50%) !important;
-
-        /* 3. WIDTH: Maintain aspect ratio */
         width: auto !important;
         min-width: 180vh;
 
-        /* 4. GRAPHICS CARD FIXES (Prevents flickering/moving) */
+        /* 4. STABILITY */
         z-index: 0;
         backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
         transition: none !important;
     }
 }
