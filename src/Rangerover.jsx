@@ -10,12 +10,10 @@ const Rangerover = () => {
     const trackRef = useRef(null);
 
     useEffect(() => {
-        // We use matchMedia to handle Mobile vs Desktop logic separately
         const mm = gsap.matchMedia();
 
         // 1. SHARED SETUP (Assets & Helpers)
         // ------------------------------------------------
-        // These run once and are available to both mobile and desktop logic
         const wheels = gsap.utils.toArray("[id*='wheel-']");
         wheels.sort((a, b) => (a.id > b.id) ? 1 : -1);
         wheels.forEach(w => w.style.display = 'none');
@@ -64,17 +62,15 @@ const Rangerover = () => {
 
         // 2. DESKTOP LOGIC (Min-Width: 769px)
         // ------------------------------------------------
-        // 🔴 STRICTLY NO CHANGES HERE (As requested)
+        // (Standard Behavior: Parked -> Drive Away -> Return)
         mm.add("(min-width: 769px)", () => {
 
-            // Ensure car starts at parking spot (x: 0) on Desktop
-            gsap.set(carRef.current, { x: 0 });
+            gsap.set(carRef.current, { x: 0 }); // Start Parked
 
             ScrollTrigger.create({
                 trigger: trackRef.current,
                 start: "650px top",
 
-                // ACTION A: Drive Away
                 onEnter: () => {
                     gsap.to(headlights, { opacity: 0.9, duration: 0.2 });
                     gsap.to(carRef.current, {
@@ -87,7 +83,6 @@ const Rangerover = () => {
                     bounceCar(4);
                 },
 
-                // ACTION B: Return & Park
                 onLeaveBack: () => {
                     gsap.set(carRef.current, { x: "100vw" });
                     gsap.set(headlights, { opacity: 0.9 });
@@ -111,54 +106,50 @@ const Rangerover = () => {
 
         // 3. MOBILE LOGIC (Max-Width: 768px)
         // ------------------------------------------------
-        // 🔴 NEW LOGIC: Start Off-Screen Right -> Roll Through -> Disappear Left
+        // (New Logic: Invisible -> Drive Past -> Teleport Reset)
         mm.add("(max-width: 768px)", () => {
 
-            // 1. Start HIDDEN off to the right
+            // Start HIDDEN off to the right
             gsap.set(carRef.current, { x: "120vw" });
 
             ScrollTrigger.create({
                 trigger: trackRef.current,
                 start: "650px top",
 
-                // ACTION A: Drive ACROSS the screen (Right to Left)
+                // ACTION A: Drive ACROSS (Right to Left)
                 onEnter: () => {
-                    // Lights On
                     gsap.to(headlights, { opacity: 0.9, duration: 0.2 });
 
-                    // Drive from Off-Screen Right ("120vw") to Off-Screen Left ("-120vw")
                     gsap.fromTo(carRef.current,
-                        { x: "120vw" }, // Force start point
+                        { x: "120vw" },
                         {
-                            x: "-150vw", // Drive all the way off left
-                            duration: 5, // Slightly slower for dramatic effect
+                            x: "-150vw",
+                            duration: 5,
                             ease: "power1.inOut",
                             overwrite: true
                         }
                     );
-
                     spinWheels(5);
                     bounceCar(5);
                 },
 
-                // ACTION B: Reset (If they scroll back up)
+                // 🔴 ACTION B: INSTANT RESET (Teleport)
+                // When scrolling back up, we just snap back to the start line invisibly.
                 onLeaveBack: () => {
-                    // Drive back to hiding spot on the right?
-                    gsap.to(carRef.current, {
-                        x: "120vw", // Go back to waiting room
-                        duration: 3,
-                        ease: "power2.inOut",
-                        overwrite: true
-                    });
+                    // 1. Kill any active driving animation immediately
+                    gsap.killTweensOf(carRef.current);
+                    gsap.killTweensOf(headlights);
 
-                    gsap.to(headlights, { opacity: 0, duration: 0.5 });
-                    spinWheels(3);
-                    bounceCar(3);
+                    // 2. Teleport back to "Waiting Room" (No animation)
+                    gsap.set(carRef.current, { x: "120vw" });
+
+                    // 3. Reset Lights
+                    gsap.set(headlights, { opacity: 0 });
                 }
             });
         });
 
-        return () => mm.revert(); // Clean up both when component unmounts
+        return () => mm.revert();
     }, []);
 
     return (
