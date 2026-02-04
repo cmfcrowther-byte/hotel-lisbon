@@ -42,24 +42,25 @@ body {
     }
 
     .hotel-vector {
-        /* 🔴 1. LOCK HEIGHT */
+        /* 1. LOCK HEIGHT */
         height: 100svh !important;
 
-        /* 2. PIN TO BOTTOM */
+        /* 2. PIN TO CENTER */
         position: fixed !important;
-        bottom: 0 !important;
-        top: auto !important;
-
-        /* 3. CENTER */
+        top: 50% !important;
         left: 50% !important;
-        transform: translateX(-50%) !important;
+
+        /* 3. PERFECT CENTERING TRANSFORM */
+        /* -50% X centers horizontally, -50% Y centers vertically */
+        transform: translate(-50%, -50%) !important;
+
+        bottom: auto !important;
         width: auto !important;
         min-width: 180vh;
 
-        /* 4. SOLIDITY (No animations) */
+        /* 4. SOLIDITY */
         z-index: 0;
         backface-visibility: hidden;
         transition: none !important;
-        /* <--- No more smooth zoom. Rock solid. */
     }
 }

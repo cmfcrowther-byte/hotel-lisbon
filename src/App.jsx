@@ -138,18 +138,19 @@ const HotelLayer = () => {
         <div ref={containerRef} style={{
             position: 'fixed',
 
-            /* 1. ANCHOR TO BOTTOM */
-            bottom: 0,
+            /* 🔴 1. UNPIN FROM BOTTOM */
+            bottom: 'auto',
+            top: '50%', /* Move to vertical middle */
             left: 0,
             width: '100%',
 
-            /* 🔴 2. THE MAGIC UNIT: Dynamic Viewport Height */
-            /* This forces the container to resize live as the URL bar moves */
-            height: '100dvh',
+            /* 🔴 2. KEEP FIXED HEIGHT */
+            height: '100svh',
 
-            /* 3. ALIGNMENT */
+            /* 🔴 3. ALIGN TO CENTER */
+            transform: 'translateY(-50%)', /* Perfect centering */
             display: 'flex',
-            alignItems: 'flex-end',
+            alignItems: 'flex-end', /* Keep content at bottom of container */
             justifyContent: 'center',
 
             zIndex: 1,
