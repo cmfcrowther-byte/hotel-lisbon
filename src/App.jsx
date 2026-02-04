@@ -9,6 +9,9 @@ import Rangerover from './Rangerover';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// 🔴 FIX FOR MOBILE JITTER: Tell GSAP to ignore the address bar resizing
+ScrollTrigger.config({ ignoreMobileResize: true });
+
 // ==============================================
 // 🎬 DIRECTOR'S SCRIPT
 // ==============================================
@@ -113,7 +116,6 @@ const HotelLayer = () => {
             doorTl.to(rightDoors, { scaleX: -1, transformOrigin: "right center", ease: "none" }, 0);
 
             // --- 4. WHITE SCREEN FADE IN ---
-            // Simply animate opacity of the white overlay from 0 to 1
             gsap.fromTo("#white-overlay",
                 { opacity: 0 },
                 {
@@ -140,9 +142,8 @@ const HotelLayer = () => {
         }}>
             {/* HOTEL ILLUSTRATION */}
             <HotelVector
-                className="hotel-vector"  /* 👈 ADD THIS CLASS NAME */
+                className="hotel-vector"
                 style={{
-                    /* width: '80%',  <-- DELETE THIS LINE */
                     maxWidth: '1600px',
                     height: 'auto',
                     display: 'block',
@@ -155,8 +156,8 @@ const HotelLayer = () => {
                 position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh',
                 backgroundColor: 'white',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                zIndex: 10, // Sits on top of everything
-                opacity: 0  // Starts invisible
+                zIndex: 10,
+                opacity: 0
             }}>
                 <div style={{ textAlign: 'center', color: 'black' }}>
                     <h1 style={{
