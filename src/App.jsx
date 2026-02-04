@@ -162,7 +162,6 @@ const HotelLayer = () => {
                     maxWidth: '1600px',
                     height: 'auto',
                     display: 'block',
-                    transform: 'translateX(1%)'
                 }}
             />
 
