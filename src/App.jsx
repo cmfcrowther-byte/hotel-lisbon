@@ -139,10 +139,16 @@ const HotelLayer = () => {
             zIndex: 1, pointerEvents: 'none'
         }}>
             {/* HOTEL ILLUSTRATION */}
-            <HotelVector style={{
-                width: '80%', maxWidth: '1600px', height: 'auto',
-                display: 'block', transform: 'translateX(1%)'
-            }} />
+            <HotelVector
+                className="hotel-vector"  /* 👈 ADD THIS CLASS NAME */
+                style={{
+                    /* width: '80%',  <-- DELETE THIS LINE */
+                    maxWidth: '1600px',
+                    height: 'auto',
+                    display: 'block',
+                    transform: 'translateX(1%)'
+                }}
+            />
 
             {/* WHITE OVERLAY SCREEN */}
             <div id="white-overlay" style={{

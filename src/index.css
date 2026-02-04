@@ -15,51 +15,39 @@ body {
     position: relative;
 }
 
-/* --- MOBILE FIXES --- */
+/* --- 1. DEFAULT DESKTOP STYLE --- */
+.hotel-vector {
+    width: 80%;
+    /* We put the 80% back here for desktop */
+    margin: 0 auto;
+}
+
+/* --- 2. MOBILE FIXES (The "Zoom") --- */
 @media (max-width: 768px) {
 
-    /* 1. Force the container to take the full height of the phone */
-    #hotel-lisbon-hero-mount {
-        height: 100vh !important;
-        min-height: 100vh;
+    /* Target the ACTUAL container ID from your App.jsx */
+    #main-container {
+        height: 100vh;
         overflow: hidden;
-        /* This chops off the left/right wings of the hotel */
-        position: relative;
+        /* Cuts off the sides of the zoomed hotel */
     }
 
-    /* 2. The Hotel Image: Zoom in to fill the height */
-    .hotel-background {
-        height: 100% !important;
-        /* Fill the vertical space */
+    /* Target the new class we added to HotelVector */
+    .hotel-vector {
+        /* Force it to fill the screen HEIGHT (Zoom effect) */
+        height: 100vh !important;
         width: auto !important;
-        /* Let the width overflow off-screen */
-        min-width: 100%;
-        /* Ensure no white space on sides */
 
-        /* The Magic Command: Zooms in and crops sides */
-        object-fit: cover;
-        object-position: center bottom;
-        /* Focus on the middle-bottom (street level) */
-    }
+        /* Make it wide enough to not leave gaps */
+        min-width: 180vh;
 
-    /* 3. The Car: Resize and center it */
-    .hotel-car {
-        width: 260px !important;
-        /* Make it big enough to see */
-        bottom: 15% !important;
-        /* Lift it up to sit on the "zoomed" road */
+        /* Lock it to the bottom center */
+        position: fixed !important;
+        bottom: 0 !important;
         left: 50% !important;
-        /* Move to middle */
-        transform: translateX(-50%);
-        /* Perfect centering */
-    }
+        transform: translateX(-50%) !important;
 
-    /* 4. The Man/Doorman: Make sure they are visible */
-    .hotel-man,
-    .hotel-door {
-        width: 100px !important;
-        /* Adjust size for mobile */
-        bottom: 15% !important;
-        /* Match the road level */
+        /* Ensure it sits behind the car */
+        z-index: 0;
     }
 }
