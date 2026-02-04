@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="1203.5063mm"
-   height="703.68427mm"
-   viewBox="0 0 1203.5063 703.68424"
+   width="1202.0096mm"
+   height="878.79926mm"
+   viewBox="0 0 1202.0096 878.79922"
    version="1.1"
    id="svg1"
    inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
@@ -25,13 +25,22 @@
      inkscape:document-units="mm"
      inkscape:zoom="0.1767767"
      inkscape:cx="3498.7643"
-     inkscape:cy="1394.4145"
+     inkscape:cy="1722.5121"
      inkscape:window-width="1920"
      inkscape:window-height="991"
      inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g1" />
+     inkscape:current-layer="g1">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="1202.0096"
+       height="878.79919"
+       id="page101"
+       margin="0 0 0"
+       bleed="0" />
+  </sodipodi:namedview>
   <defs
      id="defs1">
     <filter
@@ -676,7 +685,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(208.87302,-428.34704)">
+     transform="translate(208.87302,-341.5379)">
     <g
        id="g1"
        transform="translate(76.792852,21.608702)"
