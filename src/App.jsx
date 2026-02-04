@@ -164,7 +164,7 @@ const HotelLayer = () => {
 
                     /* 2. LIMIT HEIGHT (The Fix!) */
                     /* Never let the building be taller than 85% of the screen */
-                    maxHeight: '85vh',
+                    maxHeight: '90vh',
 
                     /* 3. MAINTAIN ASPECT RATIO */
                     height: 'auto',
