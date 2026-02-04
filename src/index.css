@@ -25,29 +25,30 @@ body {
 /* --- 2. MOBILE FIXES (The "Zoom") --- */
 @media (max-width: 768px) {
 
-    /* Target the ACTUAL container ID from your App.jsx */
+    /* 🟢 PASTE THIS NEW BLOCK */
     #main-container {
-        height: 100vh;
-        overflow: hidden;
-        /* Cuts off the sides of the zoomed hotel */
+        height: auto !important;
+        /* Allow the page to be long (8000px) so we can scroll */
+        min-height: 100vh;
+        overflow-x: hidden;
+        /* Only hide the SIDES (horizontal), allow Vertical scroll */
+        overflow-y: visible;
+        /* Explicitly allow scrolling down */
+        position: relative;
     }
 
-    /* Target the new class we added to HotelVector */
     .hotel-vector {
-        /* Force it to fill the screen HEIGHT (Zoom effect) */
         height: 100vh !important;
+        /* Zoomed In */
         width: auto !important;
-
-        /* Make it wide enough to not leave gaps */
         min-width: 180vh;
+        /* Ensure it's wide enough */
 
-        /* Lock it to the bottom center */
         position: fixed !important;
-        bottom: 0 !important;
+        /* Stays stuck to the screen while you scroll */
+        top: 0 !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
-
-        /* Ensure it sits behind the car */
         z-index: 0;
     }
 }
