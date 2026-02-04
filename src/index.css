@@ -1,15 +1,17 @@
 /* src/index.css */
-html,
+html {
+    background-color: #00091d;
+    /* Paint the "basement" dark blue */
+}
+
 body {
     margin: 0;
     padding: 0;
-    /* 🔴 REMOVED: height: auto !important */
-    /* 🔴 REMOVED: min-height: 100% */
-    /* 🔴 REMOVED: overflow-y: auto !important (THIS WAS THE KILLER) */
     width: 100%;
-    /* 1. THE UNDERWEAR FIX: Dark Blue Background */
-    /* This kills the white flash instantly. */
     background-color: #00091d;
+    /* Paint the "floor" dark blue */
+    overscroll-behavior: none;
+    /* Stops the "bounce" effect on iPhone */
 }
 
 #root {
@@ -40,24 +42,23 @@ body {
     }
 
     .hotel-vector {
-        /* 1. HEIGHT: Fits perfectly in the "Small" viewport (Start state) */
+        /* 1. HEIGHT: Lock to the "Smallest" view (Address bar visible) */
         height: 100svh !important;
 
-        /* 2. POSITION: Lock to the TOP (The Head) */
-        /* Now, when the bottom of the screen expands, the hotel ignores it. */
+        /* 2. POSITION: Pin to TOP */
         position: fixed !important;
         top: 0 !important;
-        /* <--- CHANGED FROM BOTTOM TO TOP */
-        bottom: auto !important;
-
-        /* 3. CENTER & WIDTH */
         left: 50% !important;
         transform: translateX(-50%) !important;
+
+        /* 3. WIDTH: Maintain aspect ratio */
         width: auto !important;
         min-width: 180vh;
-        z-index: 0;
 
-        /* 4. NO MOVING */
+        /* 4. GRAPHICS CARD FIXES (Prevents flickering/moving) */
+        z-index: 0;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
         transition: none !important;
     }
 }
