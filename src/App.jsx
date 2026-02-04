@@ -138,16 +138,16 @@ const HotelLayer = () => {
         <div ref={containerRef} style={{
             position: 'fixed',
 
-            /* 🔴 1. ANCHOR TO BOTTOM */
+            /* 1. ANCHOR TO BOTTOM */
             bottom: 0,
             left: 0,
             width: '100%',
 
-            /* 🔴 2. USE SVH (Small Viewport Height) */
-            /* This fits the hotel perfectly between the address bar and the bottom */
-            height: '100svh',
+            /* 🔴 2. THE MAGIC UNIT: Dynamic Viewport Height */
+            /* This forces the container to resize live as the URL bar moves */
+            height: '100dvh',
 
-            /* 🔴 3. ALIGN TO BOTTOM */
+            /* 3. ALIGNMENT */
             display: 'flex',
             alignItems: 'flex-end',
             justifyContent: 'center',
@@ -155,6 +155,7 @@ const HotelLayer = () => {
             zIndex: 1,
             pointerEvents: 'none'
         }}>
+
             {/* HOTEL ILLUSTRATION */}
             <HotelVector
                 className="hotel-vector"
