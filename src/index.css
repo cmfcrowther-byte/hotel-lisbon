@@ -7,6 +7,9 @@ body {
     /* 🔴 REMOVED: min-height: 100% */
     /* 🔴 REMOVED: overflow-y: auto !important (THIS WAS THE KILLER) */
     width: 100%;
+    /* 1. THE UNDERWEAR FIX: Dark Blue Background */
+    /* This kills the white flash instantly. */
+    background-color: #00091d;
 }
 
 #root {
@@ -37,23 +40,24 @@ body {
     }
 
     .hotel-vector {
-        /* 1. HEIGHT: Fit exactly into the "Small" viewport (with address bar) */
+        /* 1. HEIGHT: Fits perfectly in the "Small" viewport (Start state) */
         height: 100svh !important;
 
-        /* 2. WIDTH: Ensure it zooms/crops the sides to fill space */
-        width: auto !important;
-        min-width: 180vh;
-        /* Adjust this if you want it wider/narrower */
-
-        /* 3. POSITION: Anchor to the BOTTOM */
-        /* If the screen gets taller, the empty space appears at the TOP (Sky) */
+        /* 2. POSITION: Lock to the TOP (The Head) */
+        /* Now, when the bottom of the screen expands, the hotel ignores it. */
         position: fixed !important;
-        bottom: 0 !important;
+        top: 0 !important;
+        /* <--- CHANGED FROM BOTTOM TO TOP */
+        bottom: auto !important;
+
+        /* 3. CENTER & WIDTH */
         left: 50% !important;
         transform: translateX(-50%) !important;
+        width: auto !important;
+        min-width: 180vh;
         z-index: 0;
 
-        /* 4. STABILITY: No resizing animations */
+        /* 4. NO MOVING */
         transition: none !important;
     }
 }
