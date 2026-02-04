@@ -159,9 +159,22 @@ const HotelLayer = () => {
             <HotelVector
                 className="hotel-vector"
                 style={{
+                    /* 1. LIMIT WIDTH (Already there) */
                     maxWidth: '1600px',
+
+                    /* 2. LIMIT HEIGHT (The Fix!) */
+                    /* Never let the building be taller than 85% of the screen */
+                    maxHeight: '85vh',
+
+                    /* 3. MAINTAIN ASPECT RATIO */
                     height: 'auto',
+                    width: 'auto',
+
+                    /* 4. LAYOUT */
                     display: 'block',
+
+                    /* 5. CENTER IT (Crucial if it shrinks) */
+                    margin: '0 auto'
                 }}
             />
 
