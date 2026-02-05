@@ -7,32 +7,52 @@ gsap.registerPlugin(ScrollTrigger);
 const ContentLayer = () => {
     const containerRef = useRef(null);
     const heroRef = useRef(null);
-    const wordsRef = useRef(null);
+    const staticTextRef = useRef(null); // Ref for "ENGINEERING"
+    const wordsRef = useRef(null);      // Ref for the rolling words
     const gridRef = useRef(null);
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
 
             // ---------------------------------------------
-            // 1. HERO ANIMATION (The Rolling Text)
+            // 1. HERO ANIMATION (Roll & Split)
             // ---------------------------------------------
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: heroRef.current,
                     start: "top top",
-                    end: "+=2000",
+                    end: "+=3000", // Long scroll distance
                     pin: true,
                     scrub: 1,
                 }
             });
 
-            // Move list UP. 
-            // We have 3 words: Motion, Attention, Immersion.
-            // yPercent: -66.6 moves to the 3rd item.
+            // STEP A: Roll the words UP (Motion -> Immersion)
             tl.to(wordsRef.current, {
                 yPercent: -66.6,
                 ease: "steps(2)",
+                duration: 2
             });
+
+            // STEP B: The "Red Sea Split" (Forceful Version)
+            // We use a label "split" to make sure they happen at the exact same time
+            tl.add("split");
+
+            // Move ENGINEERING to the Left (Off screen)
+            tl.to(staticTextRef.current, {
+                x: -window.innerWidth, // Move left by full screen width
+                opacity: 0,
+                ease: "power2.in",
+                duration: 1
+            }, "split");
+
+            // Move IMMERSION to the Right (Off screen)
+            tl.to(wordsRef.current, {
+                x: window.innerWidth, // Move right by full screen width
+                opacity: 0,
+                ease: "power2.in",
+                duration: 1
+            }, "split");
 
 
             // ---------------------------------------------
@@ -50,7 +70,7 @@ const ContentLayer = () => {
                     ease: "power2.out",
                     scrollTrigger: {
                         trigger: gridRef.current,
-                        start: "top 80%",
+                        start: "top 70%",
                         toggleActions: "play none none reverse"
                     }
                 }
@@ -80,46 +100,61 @@ const ContentLayer = () => {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                padding: '0 10px' // Slightly tighter padding for mobile
+                padding: '0 20px',
+                overflow: 'hidden'
             }}>
 
-                {/* STATIC TOP TEXT */}
-                <h2 style={{
-                    fontSize: 'clamp(2.5rem, 8vw, 6rem)', // Adjusted min-size for "ENGINEERING"
-                    fontFamily: 'Georgia, serif',
-                    color: '#1a1a1a',
-                    margin: 0,
-                    textAlign: 'center',
-                    lineHeight: 1.1
-                }}>
-                    ENGINEERING
-                </h2>
-
-                {/* ROTATING WORD CONTAINER */}
+                {/* CONTAINER FOR THE SPLIT ANIMATION */}
                 <div style={{
-                    height: 'clamp(2.5rem, 8vw, 6rem)',
-                    overflow: 'hidden',
-                    position: 'relative'
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '0.5rem'
                 }}>
-                    {/* THE MOVING LIST */}
-                    <div ref={wordsRef} style={{ display: 'flex', flexDirection: 'column' }}>
-                        <div className="word-item">MOTION</div>
-                        <div className="word-item">ATTENTION</div>
-                        <div className="word-item">IMMERSION</div>
+
+                    {/* STATIC TOP TEXT ("ENGINEERING") */}
+                    <h2 ref={staticTextRef} style={{
+                        fontSize: 'clamp(2rem, 4vw, 3.5rem)', // Small & Elegant
+                        fontFamily: 'Georgia, serif',
+                        color: '#1a1a1a',
+                        margin: 0,
+                        textAlign: 'center',
+                        lineHeight: 1.1,
+                        willChange: 'transform'
+                    }}>
+                        ENGINEERING
+                    </h2>
+
+                    {/* ROTATING WORD CONTAINER */}
+                    <div style={{
+                        height: 'clamp(2rem, 4vw, 3.5rem)', // Matches font size
+                        overflow: 'hidden',
+                        position: 'relative',
+                        width: '100%',
+                        display: 'flex',
+                        justifyContent: 'center'
+                    }}>
+                        {/* THE MOVING LIST */}
+                        <div ref={wordsRef} style={{ display: 'flex', flexDirection: 'column', willChange: 'transform' }}>
+                            <div className="word-item">MOTION</div>
+                            <div className="word-item">ATTENTION</div>
+                            <div className="word-item">IMMERSION</div>
+                        </div>
                     </div>
+
                 </div>
 
                 {/* INLINE STYLES FOR THE WORDS */}
                 <style>{`
           .word-item {
-            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-size: clamp(2rem, 4vw, 3.5rem); 
             font-family: Arial, sans-serif;
             font-weight: 900;
             color: #1a1a1a;
             margin: 0;
             text-align: center;
             line-height: 1; 
-            height: clamp(2.5rem, 8vw, 6rem); 
+            height: clamp(2rem, 4vw, 3.5rem);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -140,7 +175,9 @@ const ContentLayer = () => {
                     fontSize: '1.2rem',
                     color: '#555',
                     marginBottom: '80px',
-                    maxWidth: '600px'
+                    maxWidth: '600px',
+                    fontFamily: 'Georgia, serif',
+                    fontStyle: 'italic'
                 }}>
                     Static sites are forgotten. Motion is remembered. We build high-performance experiences that rank high and load fast.
                 </p>
