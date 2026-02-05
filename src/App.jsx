@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SkyBackground from './SkyBG';
 import HotelVector from './HotelBG.svg?react';
 import Rangerover from './Rangerover';
+import ContentLayer from './ContentLayer'; // <--- Import it 
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -164,7 +165,7 @@ const HotelLayer = () => {
 
                     /* 2. LIMIT HEIGHT (The Fix!) */
                     /* Never let the building be taller than 85% of the screen */
-                    maxHeight: '92vh',
+                    maxHeight: '95vh',
 
                     /* 3. MAINTAIN ASPECT RATIO */
                     height: 'auto',
@@ -222,6 +223,8 @@ function App() {
             <div style={{ position: 'relative', zIndex: 2 }}>
                 <Rangerover />
             </div>
+
+            <ContentLayer /> {/* <--- Add it here at the bottom */}
 
             {/* SPACER */}
             <div style={{ height: '8000px' }} />
