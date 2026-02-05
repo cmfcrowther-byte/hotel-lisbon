@@ -16,44 +16,41 @@ const ContentLayer = () => {
             // ---------------------------------------------
             // 1. HERO ANIMATION (The Rolling Text)
             // ---------------------------------------------
-            // We pin the Hero section so it stays stuck on screen while words change
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: heroRef.current,
-                    start: "top top",      // Start when top of section hits top of screen
-                    end: "+=2000",         // Duration of the "scroll" (2000px)
-                    pin: true,             // Stick it!
-                    scrub: 1,              // Smooth linking to scrollbar
-                    // markers: true       // <--- Uncomment this if you need to debug
+                    start: "top top",
+                    end: "+=2000",
+                    pin: true,
+                    scrub: 1,
                 }
             });
 
-            // The Animation: Move the list of words UP
-            // We have 3 words. We want to stop on each one.
-            // 'yPercent: -66' moves to the last word (approx)
+            // Move list UP. 
+            // We have 3 words: Motion, Attention, Immersion.
+            // yPercent: -66.6 moves to the 3rd item.
             tl.to(wordsRef.current, {
                 yPercent: -66.6,
-                ease: "steps(2)", // "steps" makes it snap like a mechanical board (optional, use 'none' for smooth)
+                ease: "steps(2)",
             });
 
 
             // ---------------------------------------------
             // 2. DASHBOARD ANIMATION (The Pop-Up Grid)
             // ---------------------------------------------
-            // Select all direct children (divs) of the grid
             const blocks = gsap.utils.toArray(gridRef.current.children);
 
             gsap.fromTo(blocks,
-                { y: 100, opacity: 0 }, // Start state: down and invisible
+                { y: 100, opacity: 0 },
                 {
                     y: 0,
                     opacity: 1,
                     duration: 0.8,
-                    stagger: 0.2, // 0.2s delay between each block popping up
+                    stagger: 0.2,
                     ease: "power2.out",
                     scrollTrigger: {
                         trigger: gridRef.current,
-                        start: "top 80%", // Start when top of grid hits 80% of screen height
+                        start: "top 80%",
                         toggleActions: "play none none reverse"
                     }
                 }
@@ -75,7 +72,7 @@ const ContentLayer = () => {
         }}>
 
             {/* ---------------------------------------------
-          SECTION 1: HERO ("WE CREATE")
+          SECTION 1: HERO ("ENGINEERING...")
       --------------------------------------------- */}
             <div ref={heroRef} style={{
                 height: '100vh',
@@ -83,47 +80,46 @@ const ContentLayer = () => {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                padding: '0 20px'
+                padding: '0 10px' // Slightly tighter padding for mobile
             }}>
 
                 {/* STATIC TOP TEXT */}
                 <h2 style={{
-                    fontSize: 'clamp(3rem, 8vw, 6rem)',
+                    fontSize: 'clamp(2.5rem, 8vw, 6rem)', // Adjusted min-size for "ENGINEERING"
                     fontFamily: 'Georgia, serif',
                     color: '#1a1a1a',
                     margin: 0,
                     textAlign: 'center',
                     lineHeight: 1.1
                 }}>
-                    WE CREATE
+                    ENGINEERING
                 </h2>
 
                 {/* ROTATING WORD CONTAINER */}
-                {/* We make a window (height of 1 line) and hide the overflow */}
                 <div style={{
-                    height: 'clamp(3rem, 8vw, 6rem)', // Matches font size
+                    height: 'clamp(2.5rem, 8vw, 6rem)',
                     overflow: 'hidden',
                     position: 'relative'
                 }}>
                     {/* THE MOVING LIST */}
                     <div ref={wordsRef} style={{ display: 'flex', flexDirection: 'column' }}>
-                        <div className="word-item">STORIES</div>
-                        <div className="word-item">EXPERIENCES</div>
-                        <div className="word-item">MEMORIES</div>
+                        <div className="word-item">MOTION</div>
+                        <div className="word-item">ATTENTION</div>
+                        <div className="word-item">IMMERSION</div>
                     </div>
                 </div>
 
                 {/* INLINE STYLES FOR THE WORDS */}
                 <style>{`
           .word-item {
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: clamp(2.5rem, 8vw, 6rem);
             font-family: Arial, sans-serif;
             font-weight: 900;
             color: #1a1a1a;
             margin: 0;
             text-align: center;
-            line-height: 1; /* Tight line height */
-            height: clamp(3rem, 8vw, 6rem); /* Height matches container */
+            line-height: 1; 
+            height: clamp(2.5rem, 8vw, 6rem); 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -167,7 +163,6 @@ const ContentLayer = () => {
                             justifyContent: 'center',
                             borderRadius: '8px'
                         }}>
-                            {/* Placeholder for Odometer */}
                             <span style={{ color: '#999' }}>SPEED.svg</span>
                         </div>
                         <h3 style={{ fontSize: '1.5rem', marginBottom: '10px' }}>Velocity</h3>
